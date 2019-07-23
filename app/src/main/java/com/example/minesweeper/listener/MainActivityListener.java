@@ -18,8 +18,6 @@ public class MainActivityListener {
     //endregion
 
     //region 1. Decl and Init
-    private Context context;
-
     private TableLayout tblAllField;
 
     private MainActivity activity;
@@ -31,18 +29,31 @@ public class MainActivityListener {
     //endregion
 
     //region 2. Constructor
-
-    public MainActivityListener(Context context, TableLayout tblAllField, MainActivity activity){
-        this.context=context;
+    public MainActivityListener(MainActivity activity, TableLayout tblAllField){
         this.activity=activity;
         this.tblAllField=tblAllField;
+    }
+    //endregion
 
+    //region 3. Getters and Setters
+
+    public int getImageSize() {
+        return iImageSize;
+    }
+    public int getSpaceSize() {
+        return iSpaceSize;
+    }
+
+    public void setImageSize(int iImageSize) {
+        this.iImageSize = iImageSize;
+    }
+    public void setSpaceSize(int iSpaceSize) {
+        this.iSpaceSize = iSpaceSize;
     }
 
     //endregion
 
-
-    //region 3. Functions and Methods
+    //region 4. Functions and Methods
     public void populateButtons(){
         //Setting the tables Margin
         LinearLayout.LayoutParams params= new LinearLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT,TableLayout.LayoutParams.WRAP_CONTENT);

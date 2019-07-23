@@ -19,6 +19,7 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.example.minesweeper.R;
+import com.example.minesweeper.listener.MainActivityListener;
 
 public class MainActivity extends AppCompatActivity {
     //region 0. Constants
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     //region 1. Decl and Init
     private TableLayout tblAllField;
 
-    private Button[][] allButton;
+    MainActivityListener listener;
     //endregion
 
     //region 2. Lifecycle
@@ -44,10 +45,16 @@ public class MainActivity extends AppCompatActivity {
         //Gender the Widgets
         this.tblAllField=findViewById(R.id.tblAllField);
 
-
         //Init widgets
+        this.listener=new MainActivityListener(this,  tblAllField);
 
-        //
+        //TODO Calculate the iSpaceSize and iImageSize
+        this.listener.setImageSize(300);
+        this.listener.setSpaceSize(600);
+        
+
+        //Creating the Table
+        this.listener.populateButtons();
 
 
     }
