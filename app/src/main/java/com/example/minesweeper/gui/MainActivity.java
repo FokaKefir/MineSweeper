@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     //region 1. Decl
     private TableLayout tblAllField;
 
-    MainActivityListener listener;
+    private MainActivityListener listener;
     //endregion
 
     //region 2. Lifecycle
