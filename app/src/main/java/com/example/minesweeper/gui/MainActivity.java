@@ -20,17 +20,19 @@ import android.widget.Toast;
 
 import com.example.minesweeper.R;
 import com.example.minesweeper.listener.MainActivityListener;
+import com.example.minesweeper.model.NumberTable;
 
 public class MainActivity extends AppCompatActivity {
     //region 0. Constants
-    private static final int NUMBER_ROWS=1;
-    private static final int NUMBER_COLUMNS=1;
+
     //endregion
 
     //region 1. Decl
     private TableLayout tblAllField;
 
     private MainActivityListener listener;
+
+    private NumberTable numberTable;
     //endregion
 
     //region 2. Lifecycle
@@ -46,16 +48,17 @@ public class MainActivity extends AppCompatActivity {
         this.tblAllField=findViewById(R.id.tblAllField);
 
         //Init widgets
-        this.listener=new MainActivityListener(this,  tblAllField);
+        this.listener=new MainActivityListener(this,  tblAllField, numberTable);
 
         //TODO Calculate the iSpaceSize and iImageSize
         this.listener.setImageSize(300);
         this.listener.setSpaceSize(600);
 
+        //Uploading numberTable
+        listener.upladingNumberTable();
 
         //Creating the Table
         this.listener.populateButtons();
-
 
     }
     //endregion

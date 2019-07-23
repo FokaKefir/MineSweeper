@@ -10,15 +10,18 @@ import android.widget.Toast;
 
 import com.example.minesweeper.R;
 import com.example.minesweeper.gui.MainActivity;
+import com.example.minesweeper.model.NumberTable;
 
 public class MainActivityListener {
     //region 0. Constants
-    private static final int NUMBER_ROWS=1;
-    private static final int NUMBER_COLUMNS=1;
+    private static final int NUMBER_ROWS=10;
+    private static final int NUMBER_COLUMNS=10;
     //endregion
 
     //region 1. Decl
     private TableLayout tblAllField;
+
+    private NumberTable numberTable;
 
     private MainActivity activity;
 
@@ -29,9 +32,10 @@ public class MainActivityListener {
     //endregion
 
     //region 2. Constructor
-    public MainActivityListener(MainActivity activity, TableLayout tblAllField){
+    public MainActivityListener(MainActivity activity, TableLayout tblAllField, NumberTable numberTable){
         this.activity=activity;
         this.tblAllField=tblAllField;
+        this.numberTable=numberTable;
     }
     //endregion
 
@@ -116,7 +120,12 @@ public class MainActivityListener {
         }
     }
 
-    public void ButtonClicked(int row, int column){
+    public void upladingNumberTable(){
+        this.numberTable= new NumberTable(NUMBER_ROWS, NUMBER_COLUMNS);
+        this.numberTable.uploadMatrix();
+    }
+
+    private void ButtonClicked(int row, int column){
         //Toast
         Toast.makeText(activity,
                 "Row: " + String.valueOf(row)+ "\nColumn: " + String.valueOf(column),
