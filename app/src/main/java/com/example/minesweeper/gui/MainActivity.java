@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     //endregion
 
     //region 3. Functions and Methods
-    private void populateButtons(){
+    public void populateButtons(){
         //Setting the tables Margin
         LinearLayout.LayoutParams params= new LinearLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT,TableLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(iSpaceSize, 0, iSpaceSize, 0);
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void ButtonClicked(int row, int column){
+    public void ButtonClicked(int row, int column){
         //Toast
         Toast.makeText(this,
                 "Row: " + String.valueOf(row)+ "\nColumn: " + String.valueOf(column),
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         allButton[row][column].setBackgroundResource(R.drawable.question_mark);
 
     }
-    private float min(float a, float b) {
+    public float min(float a, float b) {
         if(a<b)
             return a;
         else
