@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         this.listener=new MainActivityListener(this,  tblAllField, numberTable);
 
         //TODO Calculate the iSpaceSize and iImageSize
-        this.listener.setImageSize(100);
+        this.listener.setImageSize(80);
         this.listener.setSpaceSize(600);
 
         //Uploading numberTable
