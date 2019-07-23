@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         this.listener.setSpaceSize(600);
 
         //Uploading numberTable
-        listener.upladingNumberTable();
+        listener.uploadingNumberTable();
 
         //Creating the Table
         this.listener.populateButtons();

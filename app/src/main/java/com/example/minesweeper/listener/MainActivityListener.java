@@ -120,7 +120,7 @@ public class MainActivityListener {
         }
     }
 
-    public void upladingNumberTable(){
+    public void uploadingNumberTable(){
         this.numberTable= new NumberTable(NUMBER_ROWS, NUMBER_COLUMNS);
         this.numberTable.uploadMatrix();
     }
@@ -131,9 +131,12 @@ public class MainActivityListener {
                 "Row: " + String.valueOf(row)+ "\nColumn: " + String.valueOf(column),
                 Toast.LENGTH_SHORT).show();
 
-        //Set Background
-        allButton[row][column].setBackgroundResource(R.drawable.question_mark);
-
+        if(numberTable.getFromPosition(row, column)!=NumberTable.DEF_BOMB){
+            //TODO placing correct number-image
+        }
+        else{
+            //TODO ending the game
+        }
     }
 
     //endregion

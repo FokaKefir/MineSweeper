@@ -3,7 +3,7 @@ package com.example.minesweeper.model;
 public class NumberTable {
     //region 0. Constants
     private static final int DEF_NUMBER_OF_BOMBS=20;
-    private static final int DEF_BOMB=-1;
+    public static final int DEF_BOMB=-1;
     //endregion
 
     //region 1. Decl and Init
@@ -23,6 +23,10 @@ public class NumberTable {
     //endregion
 
     //region 3. Getters and Setters
+    public int getFromPosition(int row, int column){
+        return iMatrix[row][column];
+    }
+
     public int getRow() {
         return iRow;
     }
