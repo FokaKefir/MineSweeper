@@ -17,7 +17,7 @@ public class MainActivityListener {
     private static final int NUMBER_COLUMNS=1;
     //endregion
 
-    //region 1. Decl and Init
+    //region 1. Decl
     private TableLayout tblAllField;
 
     private MainActivity activity;

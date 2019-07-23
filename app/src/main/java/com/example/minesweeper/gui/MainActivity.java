@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int NUMBER_COLUMNS=1;
     //endregion
 
-    //region 1. Decl and Init
+    //region 1. Decl
     private TableLayout tblAllField;
 
     MainActivityListener listener;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         //TODO Calculate the iSpaceSize and iImageSize
         this.listener.setImageSize(300);
         this.listener.setSpaceSize(600);
-        
+
 
         //Creating the Table
         this.listener.populateButtons();
