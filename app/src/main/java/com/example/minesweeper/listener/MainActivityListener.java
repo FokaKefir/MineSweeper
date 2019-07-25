@@ -129,7 +129,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
                 allButton[row][column].setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
-                        ButtonClicked(finalRow, finalColumn);
+                        buttonClicked(finalRow, finalColumn);
                     }
                 });
 
@@ -139,23 +139,65 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
             }
         }
     }
-
     public void uploadingNumberTable(){
         this.numberTable= new NumberTable(NUMBER_ROWS, NUMBER_COLUMNS);
         this.numberTable.uploadMatrix();
     }
-
-    private void ButtonClicked(int row, int column){
+    private void buttonClicked(int row, int column){
         //Toast
         Toast.makeText(activity,
                 "Row: " + String.valueOf(row)+ "\nColumn: " + String.valueOf(column),
                 Toast.LENGTH_SHORT).show();
 
         if(strClick.equals(DEF_FLAG)){
-            //TODO placing correct number-image
+            //Placing Flag
+            allButton[row][column].setBackgroundResource(R.drawable.flag);
         }
         else{
-            //TODO ending the game
+
+            if(numberTable.getFromPosition(row, column)==NumberTable.DEF_BOMB)
+                //Ending the game
+                endingTheGame(row, column);
+            else
+                //Placing the number
+                placingTheNumber(row, column);
+        }
+    }
+
+    private void endingTheGame(int row, int column){
+        allButton[row][column].setBackgroundResource(R.drawable.defuzed_bomb);
+    }
+
+    private void placingTheNumber(int row, int column){
+        int iNumber=numberTable.getFromPosition(row, column);
+        switch (iNumber){
+            case 0:
+                allButton[row][column].setBackgroundResource(R.drawable.zero);
+                break;
+            case 1:
+                allButton[row][column].setBackgroundResource(R.drawable.one);
+                break;
+            case 2:
+                allButton[row][column].setBackgroundResource(R.drawable.two);
+                break;
+            case 3:
+                allButton[row][column].setBackgroundResource(R.drawable.three);
+                break;
+            case 4:
+                allButton[row][column].setBackgroundResource(R.drawable.four);
+                break;
+            case 5:
+                allButton[row][column].setBackgroundResource(R.drawable.five);
+                break;
+            case 6:
+                allButton[row][column].setBackgroundResource(R.drawable.six);
+                break;
+            case 7:
+                allButton[row][column].setBackgroundResource(R.drawable.seven);
+                break;
+            case 8:
+                allButton[row][column].setBackgroundResource(R.drawable.eight);
+                break;
         }
     }
 
