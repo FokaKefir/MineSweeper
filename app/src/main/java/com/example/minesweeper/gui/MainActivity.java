@@ -1,11 +1,14 @@
 package com.example.minesweeper.gui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -61,6 +64,22 @@ public class MainActivity extends AppCompatActivity {
         this.listener.populateButtons();
 
     }
+    //endregion
+
+    //region 3. Menu Generation and Handling
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu mainActivityMenu) {
+        //Inherited Method generates the Menu
+        this.getMenuInflater().inflate(R.menu.main_activity_menu, mainActivityMenu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected( MenuItem clickedMnuItem) {
+        return this.listener.onMenuItemClicked(clickedMnuItem);
+    }
+
     //endregion
 
 }

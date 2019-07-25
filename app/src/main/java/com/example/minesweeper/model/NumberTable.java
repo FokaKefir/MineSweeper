@@ -75,16 +75,6 @@ public class NumberTable {
         }
     }
 
-    public void outMatrix(){
-        for(int row=1;row<=iRow;row++){
-            for(int column=1;column<=iColumn;column++){
-                int k=iMatrix[row][column];
-                System.out.printf("%c ", (k==DEF_BOMB ? '*' : (char)(k+'0')));
-            }
-            System.out.println();
-        }
-    }
-
     //endregion
 
 }
