@@ -14,12 +14,12 @@ import com.example.minesweeper.gui.MainActivity;
 import com.example.minesweeper.model.NumberTable;
 
 public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
-    //region zero. Constants
+    //region 0. Constants
     private static final int NUMBER_ROWS=10;
     private static final int NUMBER_COLUMNS=10;
     //endregion
 
-    //region one. Decl
+    //region 1. Decl
     private TableLayout tblAllField;
 
     private NumberTable numberTable;
@@ -32,7 +32,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     private int iImageSize;
     //endregion
 
-    //region two. Constructor
+    //region 2. Constructor
     public MainActivityListener(MainActivity activity, TableLayout tblAllField, NumberTable numberTable){
         this.activity=activity;
         this.tblAllField=tblAllField;
@@ -40,7 +40,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     }
     //endregion
 
-    //region three. Getters and Setters
+    //region 3. Getters and Setters
 
     public int getImageSize() {
         return iImageSize;
@@ -58,7 +58,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
 
     //endregion
 
-    //region four. Functions and Methods
+    //region 4. Functions and Methods
     public void populateButtons(){
         //Setting the tables Margin
         LinearLayout.LayoutParams params= new LinearLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT,TableLayout.LayoutParams.WRAP_CONTENT);

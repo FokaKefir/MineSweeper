@@ -13,11 +13,11 @@ import com.example.minesweeper.listener.MainActivityListener;
 import com.example.minesweeper.model.NumberTable;
 
 public class MainActivity extends AppCompatActivity {
-    //region zero. Constants
+    //region 0. Constants
 
     //endregion
 
-    //region one. Decl
+    //region 1. Decl
     private TableLayout tblAllField;
 
     private MainActivityListener listener;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private NumberTable numberTable;
     //endregion
 
-    //region two. Lifecycle
+    //region 2. Lifecycle
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
     //endregion
 
-    //region three. Menu Generation and Handling
+    //region 3. Menu Generation and Handling
 
     @Override
     public boolean onCreateOptionsMenu(Menu mainActivityMenu) {

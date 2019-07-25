@@ -1,19 +1,19 @@
 package com.example.minesweeper.model;
 
 public class NumberTable {
-    //region zero. Constants
+    //region 0. Constants
     private static final int DEF_NUMBER_OF_BOMBS=20;
     public static final int DEF_BOMB=-1;
     //endregion
 
-    //region one. Decl and Init
+    //region 1. Decl and Init
     private int iRow;
     private int iColumn;
 
     private int[][] iMatrix;
     //endregion
 
-    //region two. Constructor
+    //region 2. Constructor
     public NumberTable(int iRow, int iColumn){
         this.iRow=iRow;
         this.iColumn=iColumn;
@@ -22,7 +22,7 @@ public class NumberTable {
     }
     //endregion
 
-    //region three. Getters and Setters
+    //region 3. Getters and Setters
     public int getFromPosition(int row, int column){
         return iMatrix[row][column];
     }
@@ -42,7 +42,7 @@ public class NumberTable {
     }
     //endregion
 
-    //region four. Upload the matrix with random positioned bombs and setting the numbers
+    //region 4. Upload the matrix with random positioned bombs and setting the numbers
     public void uploadMatrix(){
         //uploading the matrix with bombs
         for(int ind=0;ind<DEF_NUMBER_OF_BOMBS;ind++){
