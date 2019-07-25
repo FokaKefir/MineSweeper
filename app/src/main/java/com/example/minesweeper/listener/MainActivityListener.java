@@ -14,12 +14,12 @@ import com.example.minesweeper.gui.MainActivity;
 import com.example.minesweeper.model.NumberTable;
 
 public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
-    //region 0. Constants
+    //region zero. Constants
     private static final int NUMBER_ROWS=10;
     private static final int NUMBER_COLUMNS=10;
     //endregion
 
-    //region 1. Decl
+    //region one. Decl
     private TableLayout tblAllField;
 
     private NumberTable numberTable;
@@ -32,7 +32,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     private int iImageSize;
     //endregion
 
-    //region 2. Constructor
+    //region two. Constructor
     public MainActivityListener(MainActivity activity, TableLayout tblAllField, NumberTable numberTable){
         this.activity=activity;
         this.tblAllField=tblAllField;
@@ -40,7 +40,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     }
     //endregion
 
-    //region 3. Getters and Setters
+    //region three. Getters and Setters
 
     public int getImageSize() {
         return iImageSize;
@@ -58,7 +58,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
 
     //endregion
 
-    //region 4. Functions and Methods
+    //region four. Functions and Methods
     public void populateButtons(){
         //Setting the tables Margin
         LinearLayout.LayoutParams params= new LinearLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT,TableLayout.LayoutParams.WRAP_CONTENT);
@@ -142,7 +142,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
 
     //endregion
 
-    //region 5. Setting the Menu listener
+    //region five. Setting the Menu listener
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
