@@ -81,7 +81,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     public void populateButtons(){
         //Setting the tables Margin
         LinearLayout.LayoutParams params= new LinearLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT,TableLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(this.iSpaceSize, 0, this.iSpaceSize, 0);
+        params.setMargins(0, this.iSpaceSize,0 , this.iSpaceSize);
         tblAllField.setLayoutParams(params);
 
         //Adding the size for the matrix
@@ -166,16 +166,20 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
             case R.id.mnuFlag:
+                //Setting the strClick to the flagging mode
                 strClick=DEF_FLAG;
-                //TODO setting the visible
+
+                //Setting the visible
                 this.mnuFlag.setVisible(false);
                 this.mnuStep.setVisible(true);
 
                 break;
 
             case R.id.mnuStep:
+                //Setting the strClick to the stepping mode
                 strClick=DEF_STEP;
-                //TODO setting the visible
+
+                //Setting the visible
                 this.mnuStep.setVisible(false);
                 this.mnuFlag.setVisible(true);
 
@@ -187,6 +191,4 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
 
 
     //endregion
-
-
 }
