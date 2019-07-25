@@ -2,24 +2,11 @@ package com.example.minesweeper.gui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Space;
 import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.Toast;
 
 import com.example.minesweeper.R;
 import com.example.minesweeper.listener.MainActivityListener;
