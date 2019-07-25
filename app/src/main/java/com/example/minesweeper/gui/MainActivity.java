@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
     //endregion
 
     //region 1. Decl
+    private MenuItem mnuStep;
+    private MenuItem mnuFlag;
+
     private TableLayout tblAllField;
 
     private MainActivityListener listener;
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         this.tblAllField=findViewById(R.id.tblAllField);
 
         //Init widgets
-        this.listener=new MainActivityListener(this,  tblAllField, numberTable);
+        this.listener=new MainActivityListener(this,  tblAllField, numberTable, mnuFlag, mnuStep);
 
         //TODO Calculate the iSpaceSize and iImageSize
         this.listener.setImageSize(80);
@@ -59,11 +62,15 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu mainActivityMenu) {
         //Inherited Method generates the Menu
         this.getMenuInflater().inflate(R.menu.main_activity_menu, mainActivityMenu);
+        this.mnuFlag=mainActivityMenu.findItem(R.id.mnuFlag);
+        this.mnuStep=mainActivityMenu.findItem(R.id.mnuStep);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected( MenuItem clickedMnuItem) {
+        if(clickedMnuItem.getItemId()==R.id.mnuFlag)
+            clickedMnuItem.setVisible(false);
         return this.listener.onMenuItemClick(clickedMnuItem);
     }
 

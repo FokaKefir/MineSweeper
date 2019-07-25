@@ -1,10 +1,8 @@
 package com.example.minesweeper.listener;
 
-import android.content.Context;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -24,6 +22,9 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     //endregion
 
     //region 1. Decl
+    private MenuItem mnuStep;
+    private MenuItem mnuFlag;
+
     private TableLayout tblAllField;
 
     private NumberTable numberTable;
@@ -39,10 +40,13 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     //endregion
 
     //region 2. Constructor
-    public MainActivityListener(MainActivity activity, TableLayout tblAllField, NumberTable numberTable){
+    public MainActivityListener(MainActivity activity, TableLayout tblAllField, NumberTable numberTable, MenuItem mnuFlag, MenuItem mnuStep){
         this.activity=activity;
         this.tblAllField=tblAllField;
         this.numberTable=numberTable;
+        this.mnuFlag=mnuFlag;
+        this.mnuStep=mnuStep;
+
     }
     //endregion
 
@@ -152,10 +156,18 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
+        //TODO setting the picture
         switch (item.getItemId()){
-            case R.id.mnu:
-                //TODO setting the picture
+            case R.id.mnuFlag:
+                strClick=DEF_FLAG;
+                this.mnuFlag.setVisible(false);
+                this.mnuStep.setVisible(true);
+                break;
 
+            case R.id.mnuStep:
+                strClick=DEF_STEP;
+                this.mnuStep.setVisible(false);
+                this.mnuFlag.setVisible(true);
                 break;
         }
         Toast.makeText(activity, "Changing to " + strClick, Toast.LENGTH_SHORT).show();
