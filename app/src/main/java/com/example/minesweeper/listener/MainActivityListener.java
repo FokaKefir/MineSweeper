@@ -40,12 +40,10 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     //endregion
 
     //region 2. Constructor
-    public MainActivityListener(MainActivity activity, TableLayout tblAllField, NumberTable numberTable, MenuItem mnuFlag, MenuItem mnuStep){
+    public MainActivityListener(MainActivity activity, TableLayout tblAllField, NumberTable numberTable){
         this.activity=activity;
         this.tblAllField=tblAllField;
         this.numberTable=numberTable;
-        this.mnuFlag=mnuFlag;
-        this.mnuStep=mnuStep;
 
     }
     //endregion
@@ -58,6 +56,12 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     public int getSpaceSize() {
         return iSpaceSize;
     }
+    public MenuItem getMnuFlag() {
+        return mnuFlag;
+    }
+    public MenuItem getMnuStep() {
+        return mnuStep;
+    }
 
     public void setImageSize(int iImageSize) {
         this.iImageSize = iImageSize;
@@ -65,7 +69,12 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     public void setSpaceSize(int iSpaceSize) {
         this.iSpaceSize = iSpaceSize;
     }
-
+    public void setMnuFlag(MenuItem mnuFlag) {
+        this.mnuFlag = mnuFlag;
+    }
+    public void setMnuStep(MenuItem mnuStep) {
+        this.mnuStep = mnuStep;
+    }
     //endregion
 
     //region 4. Functions and Methods
@@ -153,21 +162,23 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     //endregion
 
     //region 5. Setting the Menu listener
-
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        //TODO setting the picture
         switch (item.getItemId()){
             case R.id.mnuFlag:
                 strClick=DEF_FLAG;
+                //TODO setting the visible
                 this.mnuFlag.setVisible(false);
                 this.mnuStep.setVisible(true);
+
                 break;
 
             case R.id.mnuStep:
                 strClick=DEF_STEP;
+                //TODO setting the visible
                 this.mnuStep.setVisible(false);
                 this.mnuFlag.setVisible(true);
+
                 break;
         }
         Toast.makeText(activity, "Changing to " + strClick, Toast.LENGTH_SHORT).show();

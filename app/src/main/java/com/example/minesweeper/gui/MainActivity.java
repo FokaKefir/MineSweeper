@@ -1,8 +1,7 @@
 package com.example.minesweeper.gui;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Context;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,9 +17,6 @@ public class MainActivity extends AppCompatActivity {
     //endregion
 
     //region 1. Decl
-    private MenuItem mnuStep;
-    private MenuItem mnuFlag;
-
     private TableLayout tblAllField;
 
     private MainActivityListener listener;
@@ -41,14 +37,14 @@ public class MainActivity extends AppCompatActivity {
         this.tblAllField=findViewById(R.id.tblAllField);
 
         //Init widgets
-        this.listener=new MainActivityListener(this,  tblAllField, numberTable, mnuFlag, mnuStep);
+        this.listener=new MainActivityListener(this,  tblAllField, numberTable);
 
         //TODO Calculate the iSpaceSize and iImageSize
         this.listener.setImageSize(80);
         this.listener.setSpaceSize(600);
 
         //Uploading numberTable
-        listener.uploadingNumberTable();
+        this.listener.uploadingNumberTable();
 
         //Creating the Table
         this.listener.populateButtons();
@@ -62,15 +58,18 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu mainActivityMenu) {
         //Inherited Method generates the Menu
         this.getMenuInflater().inflate(R.menu.main_activity_menu, mainActivityMenu);
-        this.mnuFlag=mainActivityMenu.findItem(R.id.mnuFlag);
-        this.mnuStep=mainActivityMenu.findItem(R.id.mnuStep);
+
+        //Setting the Step MenuItem invisible
+        mainActivityMenu.findItem(R.id.mnuStep).setVisible(false);
+
+        //Setting the picture for the MenuItems
+        this.listener.setMnuFlag(mainActivityMenu.findItem(R.id.mnuFlag));
+        this.listener.setMnuStep(mainActivityMenu.findItem(R.id.mnuStep));
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected( MenuItem clickedMnuItem) {
-        if(clickedMnuItem.getItemId()==R.id.mnuFlag)
-            clickedMnuItem.setVisible(false);
         return this.listener.onMenuItemClick(clickedMnuItem);
     }
 
