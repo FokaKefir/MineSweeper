@@ -165,7 +165,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     }
 
     private void endingTheGame(int row, int column){
-        allButton[row][column].setBackgroundResource(R.drawable.defuzed_bomb);
+        allButton[row][column].setBackgroundResource(R.drawable.activated_bomb);
     }
 
     private void placingTheNumber(int row, int column){
@@ -230,7 +230,5 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
         Toast.makeText(activity, "Changing to " + strClick, Toast.LENGTH_SHORT).show();
         return true;
     }
-
-
     //endregion
 }
