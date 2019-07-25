@@ -1,6 +1,7 @@
 package com.example.minesweeper.listener;
 
 import android.content.Context;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -12,7 +13,7 @@ import com.example.minesweeper.R;
 import com.example.minesweeper.gui.MainActivity;
 import com.example.minesweeper.model.NumberTable;
 
-public class MainActivityListener {
+public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     //region 0. Constants
     private static final int NUMBER_ROWS=10;
     private static final int NUMBER_COLUMNS=10;
@@ -98,7 +99,7 @@ public class MainActivityListener {
                 ));
 
                 //Set Background
-                allButton[row][column].setBackgroundResource(R.drawable.one);
+                allButton[row][column].setBackgroundResource(R.drawable.unknown);
 
                 //Set size
 
@@ -138,6 +139,24 @@ public class MainActivityListener {
             //TODO ending the game
         }
     }
+
+    //endregion
+
+    //region 5. Setting the Menu listener
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        
+        switch (item.getItemId()){
+            case R.id.mnu:
+
+                Toast.makeText(activity, "Changing", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        
+        return true;
+    }
+
 
     //endregion
 

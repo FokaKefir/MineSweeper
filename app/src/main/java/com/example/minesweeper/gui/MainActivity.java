@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected( MenuItem clickedMnuItem) {
-        return this.listener.onMenuItemClicked(clickedMnuItem);
+        return this.listener.onMenuItemClick(clickedMnuItem);
     }
 
     //endregion
