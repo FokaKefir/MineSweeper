@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -17,6 +18,9 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     //region 0. Constants
     private static final int NUMBER_ROWS=10;
     private static final int NUMBER_COLUMNS=10;
+
+    private static final String DEF_STEP="step";
+    private static final String DEF_FLAG="flag";
     //endregion
 
     //region 1. Decl
@@ -30,6 +34,8 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
 
     private int iSpaceSize;
     private int iImageSize;
+
+    private String strClick=DEF_STEP;
     //endregion
 
     //region 2. Constructor
@@ -132,7 +138,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
                 "Row: " + String.valueOf(row)+ "\nColumn: " + String.valueOf(column),
                 Toast.LENGTH_SHORT).show();
 
-        if(numberTable.getFromPosition(row, column)!=NumberTable.DEF_BOMB){
+        if(strClick.equals(DEF_FLAG)){
             //TODO placing correct number-image
         }
         else{
@@ -146,14 +152,13 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        
         switch (item.getItemId()){
             case R.id.mnu:
+                //TODO setting the picture
 
-                Toast.makeText(activity, "Changing", Toast.LENGTH_SHORT).show();
                 break;
         }
-        
+        Toast.makeText(activity, "Changing to " + strClick, Toast.LENGTH_SHORT).show();
         return true;
     }
 
