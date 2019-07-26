@@ -135,8 +135,9 @@ public class NumberTable {
 
     private void watchingNeighborField(int[] vecRow, int[] vecColumn){
         //Setting the positions vectors
-        int posRow[]={-1, 0, 1, 0};
-        int posColumn[]={0, 1, 0, -1};
+        int posRow[]={-1, -1, -1, 0, 0, 1, 1, 1};
+        int posColumn[]={-1, 0, 1, -1, 1, -1, 0, 1};
+        int positions=8;
 
         //Getting the actually position
         int row=vecRow[front];
@@ -151,7 +152,7 @@ public class NumberTable {
 
         //Exploring the neighbor field
         if(iMatrix[row][column]==0){
-            for(int ind=0;ind<4;ind++){
+            for(int ind=0;ind<positions;ind++){
                 int newRow= row + posRow[ind];
                 int newColumn= column + posColumn[ind];
 
