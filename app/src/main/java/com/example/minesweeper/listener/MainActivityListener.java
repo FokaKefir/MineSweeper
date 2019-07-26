@@ -32,19 +32,24 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     private MainActivity activity;
 
     private Button[][] allButton;
-    private boolean[][] allFlag;
+    private boolean[][] allStepPosition;
+    private boolean[][] allFlagPosition;
 
     private int iSpaceSize;
     private int iImageSize;
+    private boolean firstClick;
+    private boolean fillingIsOn;
 
-    private String strClick=DEF_STEP;
+    private String strClick;
     //endregion
 
     //region 2. Constructor
-    public MainActivityListener(MainActivity activity, TableLayout tblAllField, NumberTable numberTable){
+    public MainActivityListener(MainActivity activity, TableLayout tblAllField){
         this.activity=activity;
         this.tblAllField=tblAllField;
-        this.numberTable=numberTable;
+
+        this.firstClick=true;
+        this.strClick=DEF_STEP;
 
     }
     //endregion
@@ -86,7 +91,8 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
         tblAllField.setLayoutParams(params);
 
         //Adding the size for the
-        this.allFlag=new boolean[NUMBER_ROWS+5][NUMBER_COLUMNS+5];
+        this.allFlagPosition = new boolean[NUMBER_ROWS+5][NUMBER_COLUMNS+5];
+        this.allStepPosition = new boolean[NUMBER_ROWS+5][NUMBER_COLUMNS+5];
 
         //Adding the size for the Button matrix
         this.allButton=new Button[NUMBER_ROWS+5][NUMBER_COLUMNS+5];
@@ -113,7 +119,8 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
                 final int finalColumn=column;
 
                 //Init the boolean matrix
-                allFlag[row][column]=false;
+                allFlagPosition[row][column]=false;
+                allStepPosition[row][column]=false;
 
                 //Init the Button
                 allButton[row][column]=new Button(activity);
@@ -147,53 +154,80 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
             }
         }
     }
-    public void uploadingNumberTable(){
-        this.numberTable= new NumberTable(NUMBER_ROWS, NUMBER_COLUMNS);
-        this.numberTable.uploadMatrix();
-    }
     private void buttonClicked(int row, int column){
         //Toast
         Toast.makeText(activity,
                 "Row: " + String.valueOf(row)+ "\nColumn: " + String.valueOf(column),
                 Toast.LENGTH_SHORT).show();
 
-        //Setting the Flag
-        if(strClick.equals(DEF_FLAG)){
-            if(!allFlag[row][column]) {
-                //Placing Flag
-                allButton[row][column].setBackgroundResource(R.drawable.flag);
-
-                allFlag[row][column] = true;
-            }
-            else{
-                //Removing Flag
-                allButton[row][column].setBackgroundResource(R.drawable.unknown);
-
-                allFlag[row][column] = false;
-
-            }
+        if(firstClick){
+            firstClick=false;
+            uploadingNumberTable(row, column);
         }
-        //Setting the numbers or Ending the game
-        else{
+        else {
 
-            if(numberTable.getFromPosition(row, column)==NumberTable.DEF_BOMB)
-                //Ending the game
-                endingTheGame(row, column);
-            else
-                //Placing the number
-                placingTheNumber(row, column);
+            //Setting the Flag
+            if (strClick.equals(DEF_FLAG) && allStepPosition[row][column] == false) {
+                if (!allFlagPosition[row][column]) {
+                    //Placing Flag
+                    allButton[row][column].setBackgroundResource(R.drawable.flag);
+
+                    allFlagPosition[row][column] = true;
+                } else {
+                    //Removing Flag
+                    allButton[row][column].setBackgroundResource(R.drawable.unknown);
+
+                    allFlagPosition[row][column] = false;
+
+                }
+            }
+            //Setting the numbers or Ending the game
+            else if (allStepPosition[row][column] == false && allFlagPosition[row][column] == false) {
+                allStepPosition[row][column] = true;
+
+                if (numberTable.getFromPosition(row, column) == NumberTable.DEF_BOMB)
+                    //Ending the game
+                    endingTheGame(row, column);
+                else
+                    //Placing the number
+                    placingTheNumber(row, column);
+            }
         }
     }
+    private void uploadingNumberTable(int row, int column){
+        //Init the numberTable
+        this.numberTable= new NumberTable(NUMBER_ROWS, NUMBER_COLUMNS, this);
 
+        //The first click position will be empty field
+        do{
+            this.numberTable.uploadMatrix();
+        }while (numberTable.getFromPosition(row, column)!=0);
+
+        //Fill the zero area
+        fillingIsOn=true;
+        this.numberTable.fillTheZeroArea(row, column);
+        fillingIsOn=false;
+
+    }
+
+    //TODO Method for ending the game
     private void endingTheGame(int row, int column){
         allButton[row][column].setBackgroundResource(R.drawable.activated_bomb);
+
+
     }
 
-    private void placingTheNumber(int row, int column){
+    public void placingTheNumber(int row, int column){
         int iNumber=numberTable.getFromPosition(row, column);
+        this.allStepPosition[row][column]=true;
         switch (iNumber){
             case 0:
                 allButton[row][column].setBackgroundResource(R.drawable.zero);
+                if(!fillingIsOn) {
+                    fillingIsOn=true;
+                    numberTable.fillTheZeroArea(row, column);
+                    fillingIsOn=false;
+                }
                 break;
             case 1:
                 allButton[row][column].setBackgroundResource(R.drawable.one);

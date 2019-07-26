@@ -20,8 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private TableLayout tblAllField;
 
     private MainActivityListener listener;
-
-    private NumberTable numberTable;
     //endregion
 
     //region 2. Lifecycle
@@ -37,14 +35,11 @@ public class MainActivity extends AppCompatActivity {
         this.tblAllField=findViewById(R.id.tblAllField);
 
         //Init widgets
-        this.listener=new MainActivityListener(this,  tblAllField, numberTable);
+        this.listener=new MainActivityListener(this,  tblAllField);
 
         //TODO Calculate the iSpaceSize and iImageSize
         this.listener.setImageSize(80);
         this.listener.setSpaceSize(600);
-
-        //Uploading numberTable
-        this.listener.uploadingNumberTable();
 
         //Creating the Table
         this.listener.populateButtons();
