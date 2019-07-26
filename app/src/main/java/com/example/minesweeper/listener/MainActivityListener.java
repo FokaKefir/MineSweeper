@@ -32,6 +32,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     private MainActivity activity;
 
     private Button[][] allButton;
+    private boolean[][] allFlag;
 
     private int iSpaceSize;
     private int iImageSize;
@@ -84,7 +85,10 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
         params.setMargins(0, this.iSpaceSize,0 , this.iSpaceSize);
         tblAllField.setLayoutParams(params);
 
-        //Adding the size for the matrix
+        //Adding the size for the
+        this.allFlag=new boolean[NUMBER_ROWS+5][NUMBER_COLUMNS+5];
+
+        //Adding the size for the Button matrix
         this.allButton=new Button[NUMBER_ROWS+5][NUMBER_COLUMNS+5];
 
         for(int row=1;row<=NUMBER_ROWS;row++){
@@ -104,8 +108,12 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
 
             for(int column=1;column<=NUMBER_COLUMNS;column++){
 
+                //Saving the position
                 final int finalRow=row;
                 final int finalColumn=column;
+
+                //Init the boolean matrix
+                allFlag[row][column]=false;
 
                 //Init the Button
                 allButton[row][column]=new Button(activity);
@@ -149,10 +157,23 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
                 "Row: " + String.valueOf(row)+ "\nColumn: " + String.valueOf(column),
                 Toast.LENGTH_SHORT).show();
 
+        //Setting the Flag
         if(strClick.equals(DEF_FLAG)){
-            //Placing Flag
-            allButton[row][column].setBackgroundResource(R.drawable.flag);
+            if(!allFlag[row][column]) {
+                //Placing Flag
+                allButton[row][column].setBackgroundResource(R.drawable.flag);
+
+                allFlag[row][column] = true;
+            }
+            else{
+                //Removing Flag
+                allButton[row][column].setBackgroundResource(R.drawable.unknown);
+
+                allFlag[row][column] = false;
+
+            }
         }
+        //Setting the numbers or Ending the game
         else{
 
             if(numberTable.getFromPosition(row, column)==NumberTable.DEF_BOMB)
