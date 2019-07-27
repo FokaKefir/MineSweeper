@@ -15,7 +15,7 @@ import com.example.minesweeper.model.NumberTable;
 
 public class MainActivity extends AppCompatActivity {
     //region 0. Constants
-
+    private static final int DEF_NUMBER_OF_ROWS=10;
     //endregion
 
     //region 1. Decl
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         int screenWidth = displayMetrics.widthPixels;
         int screenHeight = displayMetrics.heightPixels;
        // iSpaceSize=screenHeight;
-        iImageSize=screenWidth/10;
+        iImageSize=screenWidth/DEF_NUMBER_OF_ROWS;
     }
     //endregion
 }
