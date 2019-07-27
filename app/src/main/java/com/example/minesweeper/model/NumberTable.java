@@ -172,6 +172,7 @@ public class NumberTable {
                 if(iMatrix[newRow][newColumn]!=DEF_BOMB && blnMatrix[newRow][newColumn]){
                     vecRow[back]=newRow;
                     vecColumn[back]=newColumn;
+                    blnMatrix[newRow][newColumn]=false;
                     back++;
                 }
             }
