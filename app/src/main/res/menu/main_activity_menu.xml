@@ -12,4 +12,5 @@
         android:icon="@drawable/menuflag"
         android:title="mnuFlag"
         app:showAsAction="always" />
+
 </menu>

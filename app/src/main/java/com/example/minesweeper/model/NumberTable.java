@@ -4,7 +4,7 @@ import com.example.minesweeper.listener.MainActivityListener;
 
 public class NumberTable {
     //region 0. Constants
-    private static final int DEF_NUMBER_OF_BOMBS=20;
+    public static final int DEF_NUMBER_OF_BOMBS=15;
     public static final int DEF_BOMB=-1;
     private static final int DEF_BOARD=1;
     //endregion
@@ -53,31 +53,28 @@ public class NumberTable {
     //endregion
 
     //region 4. Upload the matrix with random positioned bombs and setting the numbers
-    public void uploadMatrix(){
-        //Init the boolean matrix
-        this.blnMatrix= new boolean[iRow+5][iColumn+5];
 
-        //Reset the number matrix to zero and the boolean matrix
+    private void setZeroMatrix(){
         for(int row=1;row<=iRow;row++){
             for(int column=1;column<=iColumn;column++){
                 iMatrix[row][column]=0;
                 blnMatrix[row][column]=true;
             }
         }
-
-        //Uploading the matrix with bombs
-        for(int ind=0;ind<DEF_NUMBER_OF_BOMBS;ind++){
+    }
+    private void setBombs() {
+        for (int ind = 0; ind < DEF_NUMBER_OF_BOMBS; ind++) {
             int iRandomRow;
             int iRandomColumn;
             do {
-                iRandomRow = (int) ((Math.random() * iRow)+1);
-                iRandomColumn = (int) ((Math.random() * iColumn)+1);
-            }while(iMatrix[iRandomRow][iRandomColumn]==DEF_BOMB);
+                iRandomRow = (int) ((Math.random() * iRow) + 1);
+                iRandomColumn = (int) ((Math.random() * iColumn) + 1);
+            } while (iMatrix[iRandomRow][iRandomColumn] == DEF_BOMB);
 
-            iMatrix[iRandomRow][iRandomColumn]=DEF_BOMB;
+            iMatrix[iRandomRow][iRandomColumn] = DEF_BOMB;
         }
-
-        //Counting the bombs around the field
+    }
+    private void setNumbers(){
         for(int row=1;row<=iRow;row++){
             for(int column=1;column<=iColumn;column++){
                 if(iMatrix[row][column]==DEF_BOMB)
@@ -94,8 +91,8 @@ public class NumberTable {
                 }
             }
         }
-
-        //Setting the Board for the Matrix
+    }
+    private void setBoards(){
         for(int row=0;row<=iRow+1;row++){
             iMatrix[row][0]=DEF_BOARD;
             iMatrix[row][iColumn+1]=DEF_BOARD;
@@ -104,7 +101,23 @@ public class NumberTable {
             iMatrix[0][column]=DEF_BOARD;
             iMatrix[iRow+1][column]=DEF_BOARD;
         }
+    }
 
+    public void uploadMatrix(){
+        //Init the boolean matrix
+        this.blnMatrix= new boolean[iRow+5][iColumn+5];
+
+        //Reset the number matrix to zero and the boolean matrix
+        setZeroMatrix();
+
+        //Uploading the matrix with bombs
+        setBombs();
+
+        //Counting the bombs around the field
+        setNumbers();
+
+        //Setting the Board for the Matrix
+        setBoards();
 
     }
 
@@ -165,7 +178,6 @@ public class NumberTable {
         }
 
     }
-
     //endregion
 
 }

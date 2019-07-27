@@ -32,9 +32,10 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     private MainActivity activity;
 
     private Button[][] allButton;
-    private boolean[][] allStepPosition;
-    private boolean[][] allFlagPosition;
+    private boolean[][] allStepPosition;//false= is it not activated, true= is activated
+    private boolean[][] allFlagPosition;//false= there is no flag, true= there is flag
 
+    private int iFlags;
     private int iSpaceSize;
     private int iImageSize;
     private boolean firstClick;
@@ -50,12 +51,12 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
 
         this.firstClick=true;
         this.strClick=DEF_STEP;
+        this.iFlags=numberTable.DEF_NUMBER_OF_BOMBS;
 
     }
     //endregion
 
     //region 3. Getters and Setters
-
     public int getImageSize() {
         return iImageSize;
     }
