@@ -3,8 +3,10 @@ package com.example.minesweeper.gui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.TableLayout;
 
 import com.example.minesweeper.R;
@@ -20,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     private TableLayout tblAllField;
 
     private MainActivityListener listener;
+
+    private int  iImageSize,iSpaceSize;
     //endregion
 
     //region 2. Lifecycle
@@ -38,8 +42,9 @@ public class MainActivity extends AppCompatActivity {
         this.listener=new MainActivityListener(this,  tblAllField);
 
         //TODO Calculate the iSpaceSize and iImageSize
-        this.listener.setImageSize(80);
-        this.listener.setSpaceSize(600);
+        calculatingTableResolution();
+        this.listener.setImageSize(iImageSize);
+        this.listener.setSpaceSize(0);
 
         //Creating the Table
         this.listener.populateButtons();
@@ -70,4 +75,16 @@ public class MainActivity extends AppCompatActivity {
 
     //endregion
 
+    //region 4. Calculating the table resolution
+    private void calculatingTableResolution()
+    {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager wm = (WindowManager) getApplicationContext().getSystemService(this.WINDOW_SERVICE); // the results will be higher than using the activity context object or the getWindowManager() shortcut
+        wm.getDefaultDisplay().getMetrics(displayMetrics);
+        int screenWidth = displayMetrics.widthPixels;
+        int screenHeight = displayMetrics.heightPixels;
+       // iSpaceSize=screenHeight;
+        iImageSize=screenWidth/10;
+    }
+    //endregion
 }
