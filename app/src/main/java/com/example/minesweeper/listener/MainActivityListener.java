@@ -14,11 +14,10 @@ import com.example.minesweeper.model.NumberTable;
 
 public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     //region 0. Constants
-    private static final int NUMBER_ROWS=10;
-    private static final int NUMBER_COLUMNS=10;
-
     private static final String DEF_STEP="step";
     private static final String DEF_FLAG="flag";
+
+    private static final double DEF_PERCENTAGE=0.15;
     //endregion
 
     //region 1. Decl
@@ -35,9 +34,11 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     private boolean[][] allStepPosition;//false= is it not activated, true= is activated
     private boolean[][] allFlagPosition;//false= there is no flag, true= there is flag
 
+    //TODO working with the numbering the flags
     private int iFlags;
     private int iSpaceSize;
     private int iImageSize;
+    private int iAllFields;
     private boolean firstClick;
     private boolean fillingIsOn;
 
@@ -51,7 +52,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
 
         this.firstClick=true;
         this.strClick=DEF_STEP;
-        this.iFlags=numberTable.DEF_NUMBER_OF_BOMBS;
+
 
     }
     //endregion
@@ -92,13 +93,13 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
         tblAllField.setLayoutParams(params);
 
         //Adding the size for the
-        this.allFlagPosition = new boolean[NUMBER_ROWS+5][NUMBER_COLUMNS+5];
-        this.allStepPosition = new boolean[NUMBER_ROWS+5][NUMBER_COLUMNS+5];
+        this.allFlagPosition = new boolean[activity.DEF_NUMBER_OF_ROWS+5][activity.DEF_NUMBER_OF_ROWS+5];
+        this.allStepPosition = new boolean[activity.DEF_NUMBER_OF_ROWS+5][activity.DEF_NUMBER_OF_ROWS+5];
 
         //Adding the size for the Button matrix
-        this.allButton=new Button[NUMBER_ROWS+5][NUMBER_COLUMNS+5];
+        this.allButton=new Button[activity.DEF_NUMBER_OF_ROWS+5][activity.DEF_NUMBER_OF_ROWS+5];
 
-        for(int row=1;row<=NUMBER_ROWS;row++){
+        for(int row=1;row<=activity.DEF_NUMBER_OF_ROWS;row++){
 
             //Create a new TableRow
             TableRow tableRow=new TableRow(activity);
@@ -113,7 +114,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
             //Add the TableRow to the TableLayout
             tblAllField.addView(tableRow);
 
-            for(int column=1;column<=NUMBER_COLUMNS;column++){
+            for(int column=1;column<=activity.DEF_NUMBER_OF_ROWS;column++){
 
                 //Saving the position
                 final int finalRow=row;
@@ -197,7 +198,11 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     }
     private void uploadingNumberTable(int row, int column){
         //Init the numberTable
-        this.numberTable= new NumberTable(NUMBER_ROWS, NUMBER_COLUMNS, this);
+        this.numberTable= new NumberTable(activity.DEF_NUMBER_OF_ROWS, activity.DEF_NUMBER_OF_ROWS, this);
+
+        //Setting the number of bombs
+        iAllFields=activity.DEF_NUMBER_OF_ROWS*activity.DEF_NUMBER_OF_ROWS;
+        numberTable.setNumberBombs((int)(iAllFields*DEF_PERCENTAGE));
 
         //The first click position will be empty field
         do{

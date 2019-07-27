@@ -4,7 +4,6 @@ import com.example.minesweeper.listener.MainActivityListener;
 
 public class NumberTable {
     //region 0. Constants
-    public static final int DEF_NUMBER_OF_BOMBS=15;
     public static final int DEF_BOMB=-1;
     private static final int DEF_BOARD=1;
     //endregion
@@ -15,6 +14,8 @@ public class NumberTable {
 
     private int front;
     private int back;
+
+    private int iNumberBombs;
 
     private int[][] iMatrix;
     private boolean[][] blnMatrix;
@@ -43,12 +44,18 @@ public class NumberTable {
     public int getColumn() {
         return iColumn;
     }
+    public int getNumberBombs() {
+        return iNumberBombs;
+    }
 
     public void setRow(int iRow) {
         this.iRow = iRow;
     }
     public void setColumn(int iColumn) {
         this.iColumn = iColumn;
+    }
+    public void setNumberBombs(int iNumberBombs) {
+        this.iNumberBombs = iNumberBombs;
     }
     //endregion
 
@@ -63,7 +70,7 @@ public class NumberTable {
         }
     }
     private void setBombs() {
-        for (int ind = 0; ind < DEF_NUMBER_OF_BOMBS; ind++) {
+        for (int ind = 0; ind < iNumberBombs; ind++) {
             int iRandomRow;
             int iRandomColumn;
             do {

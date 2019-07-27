@@ -15,7 +15,7 @@ import com.example.minesweeper.model.NumberTable;
 
 public class MainActivity extends AppCompatActivity {
     //region 0. Constants
-    private static final int DEF_NUMBER_OF_ROWS=10;
+    public static final int DEF_NUMBER_OF_ROWS=5;
     //endregion
 
     //region 1. Decl
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         //Init widgets
         this.listener=new MainActivityListener(this,  tblAllField);
 
-        //TODO Calculate the iSpaceSize and iImageSize
+        //Calculate the iSpaceSize and iImageSize
         calculatingTableResolution();
         this.listener.setImageSize(iImageSize);
         this.listener.setSpaceSize(0);
