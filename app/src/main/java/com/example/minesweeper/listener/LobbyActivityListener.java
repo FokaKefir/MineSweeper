@@ -29,7 +29,23 @@ public class LobbyActivityListener implements AdapterView.OnItemSelectedListener
 
         Toast.makeText(activity, strText, Toast.LENGTH_SHORT).show();
 
-        int iTableSize=strText.charAt(0);
+        int iTableSize=5;
+
+        switch (strText){
+            case "5*5":
+                iTableSize=5;
+                break;
+            case "8*8":
+                iTableSize=8;
+                break;
+            case "10*10":
+                iTableSize=10;
+                break;
+            case "15*15":
+                iTableSize=15;
+                break;
+        }
+
         activity.setTableSize(iTableSize);
 
     }
@@ -44,11 +60,13 @@ public class LobbyActivityListener implements AdapterView.OnItemSelectedListener
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btnStart :
-                Toast.makeText(activity, "Start", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(activity, "Start", Toast.LENGTH_SHORT).show();
+                activity.openGameActivity();
                 break;
                 
             case R.id.btnInfo:
-                Toast.makeText(activity, "Info", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(activity, "Info", Toast.LENGTH_SHORT).show();
+                activity.openInfoActivity();
                 break;
         }
     }

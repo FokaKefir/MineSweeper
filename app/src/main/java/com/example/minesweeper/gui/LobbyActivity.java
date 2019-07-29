@@ -2,6 +2,7 @@ package com.example.minesweeper.gui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -100,7 +101,21 @@ public class LobbyActivity extends AppCompatActivity  {
     //endregion
 
     //region 7. TODO jumping into a new activity
+    public void openInfoActivity(){
 
+    }
+
+    public void openGameActivity(){
+        //Creating intent
+        Intent intent = new Intent(this, GameActivity.class);
+
+        //Putting the Extra
+        String strName=String.valueOf(R.string.size);
+        intent.putExtra(strName, iTableSize);
+
+        //Starting the activity
+        startActivity(intent);
+    }
     //endregion
 
 }

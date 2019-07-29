@@ -2,6 +2,7 @@ package com.example.minesweeper.gui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Menu;
@@ -26,6 +27,7 @@ public class GameActivity extends AppCompatActivity {
     private GameActivityListener listener;
 
     private int iImageSize;
+    private int iRowSize;
     //endregion
 
     //region 2. Lifecycle
@@ -36,6 +38,9 @@ public class GameActivity extends AppCompatActivity {
 
         //Set the Layout
         this.setContentView(R.layout.main_activity_layout);
+
+        //Get value from the activity
+        getValuesFromActivity();
 
         //Gender the Widgets
         this.tblAllField=findViewById(R.id.tblAllField);
@@ -62,7 +67,7 @@ public class GameActivity extends AppCompatActivity {
     private void setVariablesOnListener(){
         this.listener.setTblAllField(this.tblAllField);
         this.listener.setTxtvRestFlags(this.txtvRestFlags);
-        this.listener.setiRow(this.DEF_NUMBER_OF_ROWS);
+        this.listener.setiRow(this.iRowSize);
         this.listener.setImageSize(iImageSize);
         this.listener.setSpaceSize(0);
     }
@@ -98,7 +103,19 @@ public class GameActivity extends AppCompatActivity {
         WindowManager wm = (WindowManager) getApplicationContext().getSystemService(this.WINDOW_SERVICE); // the results will be higher than using the activity context object or the getWindowManager() shortcut
         wm.getDefaultDisplay().getMetrics(displayMetrics);
         int screenWidth = displayMetrics.widthPixels;
-        iImageSize=screenWidth/DEF_NUMBER_OF_ROWS;
+        iImageSize=screenWidth/iRowSize;
     }
     //endregion
+
+    //region 6. Getting the Values from the LobbyActivity
+    private void getValuesFromActivity(){
+        //Create Intent
+        Intent intent= getIntent();
+
+        //Setting the iRowSize
+        String strName=String.valueOf(R.string.size);
+        this.iRowSize=intent.getIntExtra(strName, 5);
+    }
+    //endregion
+
 }
