@@ -80,12 +80,14 @@ public class GameActivity extends AppCompatActivity {
         //Inherited Method generates the Menu
         this.getMenuInflater().inflate(R.menu.main_activity_menu, mainActivityMenu);
 
-        //Setting the Step MenuItem invisible
+        //Setting the Step mnuStep and mnuBack invisible
         mainActivityMenu.findItem(R.id.mnuStep).setVisible(false);
+        mainActivityMenu.findItem(R.id.mnuBack).setVisible(false);
 
         //Setting the picture for the MenuItems
         this.listener.setMnuFlag(mainActivityMenu.findItem(R.id.mnuFlag));
         this.listener.setMnuStep(mainActivityMenu.findItem(R.id.mnuStep));
+        this.listener.setMnuBack(mainActivityMenu.findItem(R.id.mnuBack));
         return true;
     }
 
@@ -115,6 +117,10 @@ public class GameActivity extends AppCompatActivity {
         //Setting the iRowSize
         String strName=String.valueOf(R.string.size);
         this.iRowSize=intent.getIntExtra(strName, 5);
+    }
+
+    public void closeActivity() {
+        finish();
     }
     //endregion
 

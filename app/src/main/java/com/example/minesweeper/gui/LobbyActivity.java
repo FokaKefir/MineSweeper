@@ -102,7 +102,11 @@ public class LobbyActivity extends AppCompatActivity  {
 
     //region 7. TODO jumping into a new activity
     public void openInfoActivity(){
+        //Creating intent
+        Intent  intent = new Intent(this, InfoActivity.class);
 
+        //Starting the InfoActivity
+        startActivity(intent);
     }
 
     public void openGameActivity(){
@@ -113,7 +117,7 @@ public class LobbyActivity extends AppCompatActivity  {
         String strName=String.valueOf(R.string.size);
         intent.putExtra(strName, iTableSize);
 
-        //Starting the activity
+        //Starting the GameActivity
         startActivity(intent);
     }
     //endregion

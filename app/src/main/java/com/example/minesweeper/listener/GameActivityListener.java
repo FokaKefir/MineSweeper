@@ -24,6 +24,7 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
     //region 1. Decl
     private MenuItem mnuStep;
     private MenuItem mnuFlag;
+    private MenuItem mnuBack;
 
     private TableLayout tblAllField;
 
@@ -69,6 +70,9 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
     public MenuItem getMnuStep() {
         return mnuStep;
     }
+    public MenuItem getMnuBack() {
+        return mnuBack;
+    }
 
     public void setImageSize(int iImageSize) {
         this.iImageSize = iImageSize;
@@ -81,6 +85,9 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
     }
     public void setMnuStep(MenuItem mnuStep) {
         this.mnuStep = mnuStep;
+    }
+    public void setMnuBack(MenuItem mnuBack) {
+        this.mnuBack = mnuBack;
     }
 
     public void setTblAllField(TableLayout tblAllField) {
@@ -328,6 +335,9 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
         //Blocking the buttons
         blockButtons();
 
+        //Set visible the mnuBack MenuItem
+        mnuBack.setVisible(true);
+
     }
     private void winningTheGame(){
         //Setting the background for the buttons
@@ -335,6 +345,9 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
 
         //Blocking the buttons
         blockButtons();
+
+        //Set visible the mnuBack MenuItem
+        mnuBack.setVisible(true);
 
         //Setting the txtvRestFlags to the winner text
         this.txtvRestFlags.setText("You are save");
@@ -395,6 +408,11 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
                 this.mnuStep.setVisible(false);
                 this.mnuFlag.setVisible(true);
 
+                break;
+
+            case R.id.mnuBack:
+                //Close activity
+                activity.closeActivity();
                 break;
         }
         Toast.makeText(activity, "Changing to " + strClick, Toast.LENGTH_SHORT).show();

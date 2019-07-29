@@ -2,12 +2,13 @@
     <string name="app_name">MineSweeper</string>
     <string name="strStartButtonText">START</string>
     <string name="strInfoButtonText">INFORMATIONS</string>
-    <string name= "size"></string>
+    <string name="size"></string>
 
     <string-array name="sizes">
         <item>5*5</item>
         <item>8*8</item>
         <item>10*10</item>
         <item>15*15</item>
-    </string-array>>
+    </string-array>
+    >
 </resources>

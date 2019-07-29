@@ -13,4 +13,11 @@
         android:title="mnuFlag"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/mnuBack"
+
+        android:title="mnuBack"
+        app:showAsAction="always"
+        />
+
 </menu>
