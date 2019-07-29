@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Space;
 import android.widget.Spinner;
 
@@ -18,10 +19,15 @@ public class LobbyActivity extends AppCompatActivity  {
     //endregion
 
     //region 1. Decl and Init
-
     private LobbyActivityListener listener;
 
     private Spinner spSize;
+
+    private Button btnStart;
+    private Button btnInfo;
+
+    private int iTableSize;
+
     //endregion
 
     //region 2. Lifecycle
@@ -36,14 +42,28 @@ public class LobbyActivity extends AppCompatActivity  {
         //Setting the Listener
         this.listener= new LobbyActivityListener(this);
 
+        //Setting the Variables
+        setVariables();
+
         //Setting the spinner
         this.spSize=findViewById(R.id.spSize);
         setSpinner();
+
+        //Setting the listening
+        setObjectListeners();
     }
 
     //endregion
 
-    //region 3. Setting the Spinner
+    //region 3. Setting the Variables
+    private void setVariables(){
+        this.spSize=findViewById(R.id.spSize);
+        this.btnStart=findViewById(R.id.btnStart);
+        this.btnInfo=findViewById(R.id.btnInfo);
+    }
+    //endregion
+
+    //region 4. Setting the Spinner
     private void setSpinner(){
         //Setting the adapter
         ArrayAdapter<CharSequence> adapter= ArrayAdapter.createFromResource(this, R.array.sizes, android.R.layout.simple_spinner_item);
@@ -52,11 +72,35 @@ public class LobbyActivity extends AppCompatActivity  {
         //Setting the spinner with the adapter
         spSize.setAdapter(adapter);
 
-        //Setting the listener
-        spSize.setOnItemSelectedListener(listener);
 
     }
     //endregion
 
+    //region 5. Setting the Listener
+    private void setObjectListeners(){
+        //Setting spinner
+        spSize.setOnItemSelectedListener(listener);
+
+        //Setting the Buttons
+        btnStart.setOnClickListener(listener);
+        btnInfo.setOnClickListener(listener);
+    }
+    //endregion
+
+    //region 6. Getters and Setters
+
+    public int getTableSize() {
+        return iTableSize;
+    }
+
+    public void setTableSize(int iTableSize) {
+        this.iTableSize = iTableSize;
+    }
+
+    //endregion
+
+    //region 7. TODO jumping into a new activity
+
+    //endregion
 
 }

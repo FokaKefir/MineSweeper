@@ -4,9 +4,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.example.minesweeper.R;
 import com.example.minesweeper.gui.LobbyActivity;
 
-public class LobbyActivityListener implements AdapterView.OnItemSelectedListener {
+public class LobbyActivityListener implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     //region 0. Constants
 
     //endregion
@@ -15,13 +16,11 @@ public class LobbyActivityListener implements AdapterView.OnItemSelectedListener
     private LobbyActivity activity;
     //endregion
 
-
     //region 2. Constructor
     public LobbyActivityListener(LobbyActivity activity){
         this.activity=activity;
     }
     //endregion
-
 
     //region 3. Spinner listening functions and methods
     @Override
@@ -30,10 +29,28 @@ public class LobbyActivityListener implements AdapterView.OnItemSelectedListener
 
         Toast.makeText(activity, strText, Toast.LENGTH_SHORT).show();
 
+        int iTableSize=strText.charAt(0);
+        activity.setTableSize(iTableSize);
+
     }
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+    //endregion
+    
+    //region 4. Buttons is clicked
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btnStart :
+                Toast.makeText(activity, "Start", Toast.LENGTH_SHORT).show();
+                break;
+                
+            case R.id.btnInfo:
+                Toast.makeText(activity, "Info", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
     //endregion
 

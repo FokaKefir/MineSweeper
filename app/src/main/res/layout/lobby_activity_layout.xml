@@ -17,5 +17,20 @@
     <Spinner
         android:id="@+id/spSize"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginRight="@dimen/iMarginLobby"
+        android:layout_marginLeft="@dimen/iMarginLobby"/>
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/strStartButtonText" />
+
+    <Button
+        android:id="@+id/btnInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/strInfoButtonText" />
 </LinearLayout>
