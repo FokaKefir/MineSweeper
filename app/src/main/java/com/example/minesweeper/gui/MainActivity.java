@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.TableLayout;
+import android.widget.TextView;
 
 import com.example.minesweeper.R;
 import com.example.minesweeper.listener.MainActivityListener;
@@ -15,15 +16,17 @@ import com.example.minesweeper.model.NumberTable;
 
 public class MainActivity extends AppCompatActivity {
     //region 0. Constants
-    public static final int DEF_NUMBER_OF_ROWS=5;
+    private static final int DEF_NUMBER_OF_ROWS=10;
     //endregion
 
     //region 1. Decl
     private TableLayout tblAllField;
 
+    private TextView txtvRestFlags;
+
     private MainActivityListener listener;
 
-    private int  iImageSize,iSpaceSize;
+    private int iImageSize;
     //endregion
 
     //region 2. Lifecycle
@@ -37,22 +40,36 @@ public class MainActivity extends AppCompatActivity {
 
         //Gender the Widgets
         this.tblAllField=findViewById(R.id.tblAllField);
+        this.txtvRestFlags=findViewById(R.id.txtvRestFlags);
 
         //Init widgets
-        this.listener=new MainActivityListener(this,  tblAllField);
+        this.listener=new MainActivityListener(this);
 
         //Calculate the iSpaceSize and iImageSize
         calculatingTableResolution();
-        this.listener.setImageSize(iImageSize);
-        this.listener.setSpaceSize(0);
+
+        //Setting the Variables on the listener
+        setVariablesOnListener();
 
         //Creating the Table
+        this.listener.declVariables();
         this.listener.populateButtons();
+
 
     }
     //endregion
 
-    //region 3. Menu Generation and Handling
+    //region 3. Setting the Variables on the listener
+    private void setVariablesOnListener(){
+        this.listener.setTblAllField(this.tblAllField);
+        this.listener.setTxtvRestFlags(this.txtvRestFlags);
+        this.listener.setiRow(this.DEF_NUMBER_OF_ROWS);
+        this.listener.setImageSize(iImageSize);
+        this.listener.setSpaceSize(0);
+    }
+    //endregion
+
+    //region 4. Menu Generation and Handling
 
     @Override
     public boolean onCreateOptionsMenu(Menu mainActivityMenu) {
@@ -75,15 +92,13 @@ public class MainActivity extends AppCompatActivity {
 
     //endregion
 
-    //region 4. Calculating the table resolution
+    //region 5. Calculating the table resolution
     private void calculatingTableResolution()
     {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager wm = (WindowManager) getApplicationContext().getSystemService(this.WINDOW_SERVICE); // the results will be higher than using the activity context object or the getWindowManager() shortcut
         wm.getDefaultDisplay().getMetrics(displayMetrics);
         int screenWidth = displayMetrics.widthPixels;
-        int screenHeight = displayMetrics.heightPixels;
-       // iSpaceSize=screenHeight;
         iImageSize=screenWidth/DEF_NUMBER_OF_ROWS;
     }
     //endregion

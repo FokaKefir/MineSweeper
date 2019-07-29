@@ -4,8 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".gui.MainActivity">
+
+    <TextView
+        android:id="@+id/txtvRestFlags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/colorAccent"
+        android:textSize="30dp"
+
+        />
 
     <TableLayout
         android:id="@+id/tblAllField"

@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.minesweeper.R;
@@ -30,30 +31,29 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
 
     private MainActivity activity;
 
+    private TextView txtvRestFlags;
+
     private Button[][] allButton;
     private boolean[][] allStepPosition;//false= is it not activated, true= is activated
     private boolean[][] allFlagPosition;//false= there is no flag, true= there is flag
 
     //TODO working with the numbering the flags
+    private int iRestFlags;
     private int iFlags;
     private int iSpaceSize;
     private int iImageSize;
     private int iAllFields;
+    private int iRow;
     private boolean firstClick;
     private boolean fillingIsOn;
+
 
     private String strClick;
     //endregion
 
     //region 2. Constructor
-    public MainActivityListener(MainActivity activity, TableLayout tblAllField){
+    public MainActivityListener(MainActivity activity){
         this.activity=activity;
-        this.tblAllField=tblAllField;
-
-        this.firstClick=true;
-        this.strClick=DEF_STEP;
-
-
     }
     //endregion
 
@@ -83,23 +83,41 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     public void setMnuStep(MenuItem mnuStep) {
         this.mnuStep = mnuStep;
     }
+
+    public void setTblAllField(TableLayout tblAllField) {
+        this.tblAllField = tblAllField;
+    }
+    public void setiRow(int iRow) {
+        this.iRow = iRow;
+    }
+    public void setTxtvRestFlags(TextView txtvRestFlags) {
+        this.txtvRestFlags = txtvRestFlags;
+    }
+
     //endregion
 
     //region 4. Functions and Methods
+    public void declVariables(){
+        this.firstClick=true;
+        this.strClick=DEF_STEP;
+        this.iAllFields=iRow*iRow;
+        this.iRestFlags=(int)(iAllFields*DEF_PERCENTAGE);
+        this.iFlags=iRestFlags;
+
+        //Adding the size for all Matrix
+        this.allFlagPosition = new boolean[iRow+5][iRow+5];
+        this.allStepPosition = new boolean[iRow+5][iRow+5];
+    }
     public void populateButtons(){
         //Setting the tables Margin
         LinearLayout.LayoutParams params= new LinearLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT,TableLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(0, this.iSpaceSize,0 , this.iSpaceSize);
         tblAllField.setLayoutParams(params);
 
-        //Adding the size for the
-        this.allFlagPosition = new boolean[activity.DEF_NUMBER_OF_ROWS+5][activity.DEF_NUMBER_OF_ROWS+5];
-        this.allStepPosition = new boolean[activity.DEF_NUMBER_OF_ROWS+5][activity.DEF_NUMBER_OF_ROWS+5];
-
         //Adding the size for the Button matrix
-        this.allButton=new Button[activity.DEF_NUMBER_OF_ROWS+5][activity.DEF_NUMBER_OF_ROWS+5];
+        this.allButton=new Button[iRow+5][iRow+5];
 
-        for(int row=1;row<=activity.DEF_NUMBER_OF_ROWS;row++){
+        for(int row=1;row<=iRow;row++){
 
             //Create a new TableRow
             TableRow tableRow=new TableRow(activity);
@@ -114,7 +132,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
             //Add the TableRow to the TableLayout
             tblAllField.addView(tableRow);
 
-            for(int column=1;column<=activity.DEF_NUMBER_OF_ROWS;column++){
+            for(int column=1;column<=iRow;column++){
 
                 //Saving the position
                 final int finalRow=row;
@@ -155,17 +173,45 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
                 tableRow.addView(allButton[row][column]);
             }
         }
+
+        //Setting the txtvRestFlags
+        setTextFlags();
+
     }
+    private void uploadingNumberTable(int row, int column){
+        //Init the numberTable
+        this.numberTable= new NumberTable(iRow, iRow, this);
+
+        //Setting the number of bombs
+
+        numberTable.setNumberBombs(iRestFlags);
+
+        //The first click position will be empty field
+        do{
+            this.numberTable.uploadMatrix();
+        }while (numberTable.getFromPosition(row, column)!=0);
+
+        //Fill the zero area
+        fillingIsOn=true;
+        this.numberTable.fillTheZeroArea(row, column);
+        fillingIsOn=false;
+
+    }
+    //endregion
+
+    //region 5. Functions if either button is clicked
     private void buttonClicked(int row, int column){
         //Toast
         Toast.makeText(activity,
                 "Row: " + String.valueOf(row)+ "\nColumn: " + String.valueOf(column),
                 Toast.LENGTH_SHORT).show();
 
+        //First click
         if(firstClick){
             firstClick=false;
             uploadingNumberTable(row, column);
         }
+        //Other click
         else {
 
             //Setting the Flag
@@ -195,37 +241,15 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
                     placingTheNumber(row, column);
             }
         }
-    }
-    private void uploadingNumberTable(int row, int column){
-        //Init the numberTable
-        this.numberTable= new NumberTable(activity.DEF_NUMBER_OF_ROWS, activity.DEF_NUMBER_OF_ROWS, this);
 
-        //Setting the number of bombs
-        iAllFields=activity.DEF_NUMBER_OF_ROWS*activity.DEF_NUMBER_OF_ROWS;
-        numberTable.setNumberBombs((int)(iAllFields*DEF_PERCENTAGE));
-
-        //The first click position will be empty field
-        do{
-            this.numberTable.uploadMatrix();
-        }while (numberTable.getFromPosition(row, column)!=0);
-
-        //Fill the zero area
-        fillingIsOn=true;
-        this.numberTable.fillTheZeroArea(row, column);
-        fillingIsOn=false;
+        //Setting the txtvRestFlags
+        setTextFlags();
 
     }
-
-    //TODO Method for ending the game
-    private void endingTheGame(int row, int column){
-        allButton[row][column].setBackgroundResource(R.drawable.activated_bomb);
-
-
-    }
-
     public void placingTheNumber(int row, int column){
         int iNumber=numberTable.getFromPosition(row, column);
         this.allStepPosition[row][column]=true;
+        this.allFlagPosition[row][column]=false;
         switch (iNumber){
             case 0:
                 allButton[row][column].setBackgroundResource(R.drawable.zero);
@@ -261,10 +285,31 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
                 break;
         }
     }
+    private int numberingFlags(){
+        int flags=0;
+        for(int row=1;row<=iRow;row++){
+            for (int column=1;column<=iRow;column++){
+                if(allFlagPosition[row][column])
+                    flags++;
+            }
+        }
+        return flags;
+    }
+    private void setTextFlags(){
+        //Setting the txtvRestFlags
+        this.iRestFlags=iFlags-numberingFlags();
+        this.txtvRestFlags.setText("Rest flags: " + String.valueOf(iRestFlags) );
+    }
 
+    //TODO Method for ending the game
+    private void endingTheGame(int row, int column){
+        allButton[row][column].setBackgroundResource(R.drawable.activated_bomb);
+
+
+    }
     //endregion
 
-    //region 5. Setting the Menu listener
+    //region 6. Setting the Menu listener
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
