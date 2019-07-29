@@ -33,11 +33,6 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
 
     private TextView txtvRestFlags;
 
-    private Button[][] allButton;
-    private boolean[][] allStepPosition;//false= is it not activated, true= is activated
-    private boolean[][] allFlagPosition;//false= there is no flag, true= there is flag
-
-    //TODO working with the numbering the flags
     private int iRestFlags;
     private int iFlags;
     private int iSpaceSize;
@@ -46,6 +41,10 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     private int iRow;
     private boolean firstClick;
     private boolean fillingIsOn;
+
+    private Button[][] allButton;
+    private boolean[][] allStepPosition;//false= is it not activated, true= is activated
+    private boolean[][] allFlagPosition;//false= there is no flag, true= there is flag
 
 
     private String strClick;
@@ -199,7 +198,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     }
     //endregion
 
-    //region 5. Functions if either button is clicked
+    //region 5. Button is clicked
     private void buttonClicked(int row, int column){
         //Toast
         Toast.makeText(activity,
@@ -300,16 +299,51 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
         this.iRestFlags=iFlags-numberingFlags();
         this.txtvRestFlags.setText("Rest flags: " + String.valueOf(iRestFlags) );
     }
+    //endregion
 
-    //TODO Method for ending the game
-    private void endingTheGame(int row, int column){
-        allButton[row][column].setBackgroundResource(R.drawable.activated_bomb);
+    //region 6. Methods and Functions for ending the game
+    private void endingTheGame(int explodedRow, int explodedColumn){
+        //Setting the background for the buttons
+        setBackgroundButtons(explodedRow, explodedColumn);
 
+        //Blocking the buttons
+        blockButtons();
+
+    }
+
+    private void setBackgroundButtons(int explodedRow, int explodedColumn){
+        for(int row=1;row<=iRow;row++){
+            for (int column=1;column<=iRow;column++){
+                if(numberTable.getFromPosition(row, column)==NumberTable.DEF_BOMB) {
+                    if (!allStepPosition[row][column] && !allFlagPosition[row][column])
+                        allButton[row][column].setBackgroundResource(R.drawable.bomb);
+
+                }
+                else if(allFlagPosition[row][column]){
+                    allButton[row][column].setBackgroundResource(R.drawable.bomb_incorrect);
+                }
+            }
+        }
+        allButton[explodedRow][explodedColumn].setBackgroundResource(R.drawable.bomb_activated);
+
+
+    }
+    private void blockButtons(){
+        //Setting buttons on the table
+        for(int row=1;row<=iRow;row++){
+            for (int column=1;column<=iRow;column++){
+                allButton[row][column].setClickable(false);
+            }
+        }
+
+        //Setting the menu buttons
+        this.mnuStep.setVisible(false);
+        this.mnuFlag.setVisible(false);
 
     }
     //endregion
 
-    //region 6. Setting the Menu listener
+    //region 7. Setting the Menu listener
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
