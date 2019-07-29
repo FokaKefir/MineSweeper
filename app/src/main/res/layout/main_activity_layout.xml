@@ -5,17 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/backGray"
     tools:context=".gui.MainActivity">
 
     <TextView
         android:id="@+id/txtvRestFlags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginLeft="@dimen/iMargin"
+        android:layout_marginRight="@dimen/iMargin"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
         android:textColor="@color/colorAccent"
         android:textSize="30dp"
-
-        />
+        android:textStyle="bold"/>
 
     <TableLayout
         android:id="@+id/tblAllField"

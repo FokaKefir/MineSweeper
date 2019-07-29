@@ -200,10 +200,11 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
 
     //region 5. Button is clicked
     private void buttonClicked(int row, int column){
-        //Toast
+        /*Toast
         Toast.makeText(activity,
                 "Row: " + String.valueOf(row)+ "\nColumn: " + String.valueOf(column),
                 Toast.LENGTH_SHORT).show();
+        */
 
         //First click
         if(firstClick){
@@ -294,10 +295,28 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
         }
         return flags;
     }
+    private boolean watchingToWinning(){
+        int steps=0;
+        for(int row=1;row<=iRow;row++){
+            for (int column=1;column<=iRow;column++){
+                if(numberTable.getFromPosition(row, column)==NumberTable.DEF_BOMB
+                   && allFlagPosition[row][column]==false) return false;
+                if(allStepPosition[row][column])
+                    steps++;
+            }
+        }
+        if (steps==iAllFields-iFlags)
+            return true;
+        else
+            return false;
+    }
     private void setTextFlags(){
         //Setting the txtvRestFlags
         this.iRestFlags=iFlags-numberingFlags();
-        this.txtvRestFlags.setText("Rest flags: " + String.valueOf(iRestFlags) );
+        if(iRestFlags!=0)
+            this.txtvRestFlags.setText("Rest flags: " + String.valueOf(iRestFlags));
+        else if(watchingToWinning())
+            winningTheGame();
     }
     //endregion
 
@@ -309,6 +328,16 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
         //Blocking the buttons
         blockButtons();
 
+    }
+    private void winningTheGame(){
+        //Setting the background for the buttons
+        setBackgroundButtons(0, 0);
+
+        //Blocking the buttons
+        blockButtons();
+
+        //Setting the txtvRestFlags to the winner text
+        this.txtvRestFlags.setText("You are save");
     }
 
     private void setBackgroundButtons(int explodedRow, int explodedColumn){
@@ -324,7 +353,8 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
                 }
             }
         }
-        allButton[explodedRow][explodedColumn].setBackgroundResource(R.drawable.bomb_activated);
+        if(explodedRow!=0 && explodedColumn!=0)
+            allButton[explodedRow][explodedColumn].setBackgroundResource(R.drawable.bomb_activated);
 
 
     }
