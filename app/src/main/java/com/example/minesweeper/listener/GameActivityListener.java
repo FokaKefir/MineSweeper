@@ -10,10 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.minesweeper.R;
-import com.example.minesweeper.gui.MainActivity;
+import com.example.minesweeper.gui.GameActivity;
 import com.example.minesweeper.model.NumberTable;
 
-public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
+public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
     //region 0. Constants
     private static final String DEF_STEP="step";
     private static final String DEF_FLAG="flag";
@@ -29,7 +29,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
 
     private NumberTable numberTable;
 
-    private MainActivity activity;
+    private GameActivity activity;
 
     private TextView txtvRestFlags;
 
@@ -51,7 +51,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
     //endregion
 
     //region 2. Constructor
-    public MainActivityListener(MainActivity activity){
+    public GameActivityListener(GameActivity activity){
         this.activity=activity;
     }
     //endregion
@@ -95,7 +95,7 @@ public class MainActivityListener implements MenuItem.OnMenuItemClickListener {
 
     //endregion
 
-    //region 4. Functions and Methods
+    //region 4. Generating methods
     public void declVariables(){
         this.firstClick=true;
         this.strClick=DEF_STEP;

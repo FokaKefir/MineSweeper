@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MineSweeper</string>
+
+
+    <string-array name="sizes">
+        <item>5*5</item>
+        <item>8*8</item>
+        <item>10*10</item>
+        <item>15*15</item>
+    </string-array>>
 </resources>

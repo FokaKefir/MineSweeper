@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/backGray"
-    tools:context=".gui.MainActivity">
+    tools:context=".gui.GameActivity">
 
     <TextView
         android:id="@+id/txtvRestFlags"

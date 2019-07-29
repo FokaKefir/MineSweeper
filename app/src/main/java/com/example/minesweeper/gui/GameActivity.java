@@ -11,10 +11,9 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.minesweeper.R;
-import com.example.minesweeper.listener.MainActivityListener;
-import com.example.minesweeper.model.NumberTable;
+import com.example.minesweeper.listener.GameActivityListener;
 
-public class MainActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
     //region 0. Constants
     private static final int DEF_NUMBER_OF_ROWS=10;
     //endregion
@@ -24,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView txtvRestFlags;
 
-    private MainActivityListener listener;
+    private GameActivityListener listener;
 
     private int iImageSize;
     //endregion
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         this.txtvRestFlags=findViewById(R.id.txtvRestFlags);
 
         //Init widgets
-        this.listener=new MainActivityListener(this);
+        this.listener=new GameActivityListener(this);
 
         //Calculate the iSpaceSize and iImageSize
         calculatingTableResolution();

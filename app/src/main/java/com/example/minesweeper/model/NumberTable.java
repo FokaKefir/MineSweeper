@@ -1,6 +1,6 @@
 package com.example.minesweeper.model;
 
-import com.example.minesweeper.listener.MainActivityListener;
+import com.example.minesweeper.listener.GameActivityListener;
 
 public class NumberTable {
     //region 0. Constants
@@ -20,11 +20,11 @@ public class NumberTable {
     private int[][] iMatrix;
     private boolean[][] blnMatrix;
 
-    private MainActivityListener listener;
+    private GameActivityListener listener;
     //endregion
 
     //region 2. Constructor
-    public NumberTable(int iRow, int iColumn, MainActivityListener listener){
+    public NumberTable(int iRow, int iColumn, GameActivityListener listener){
         this.iRow=iRow;
         this.iColumn=iColumn;
         this.listener=listener;
