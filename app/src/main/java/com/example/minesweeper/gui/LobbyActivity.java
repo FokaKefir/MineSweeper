@@ -100,7 +100,7 @@ public class LobbyActivity extends AppCompatActivity  {
 
     //endregion
 
-    //region 7. TODO jumping into a new activity
+    //region 7. Jumping into a new activity
     public void openInfoActivity(){
         //Creating intent
         Intent  intent = new Intent(this, InfoActivity.class);

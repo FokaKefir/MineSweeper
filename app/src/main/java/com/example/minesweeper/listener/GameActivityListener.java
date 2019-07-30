@@ -1,5 +1,6 @@
 package com.example.minesweeper.listener;
 
+import android.os.CountDownTimer;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,9 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
     private static final String DEF_FLAG="flag";
 
     private static final double DEF_PERCENTAGE=0.15;
+
+    private static final int DEF_ONE_MINUTE=60000;
+    private static final int DEF_ONE_SECOND=1000;
     //endregion
 
     //region 1. Decl
@@ -33,6 +37,11 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
     private GameActivity activity;
 
     private TextView txtvRestFlags;
+    private TextView txtvClock;
+
+    private CountDownTimer countDownTimer;//timer
+
+    private long time;//actually time
 
     private int iRestFlags;
     private int iFlags;
@@ -46,7 +55,6 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
     private Button[][] allButton;
     private boolean[][] allStepPosition;//false= is it not activated, true= is activated
     private boolean[][] allFlagPosition;//false= there is no flag, true= there is flag
-
 
     private String strClick;
     //endregion
@@ -99,7 +107,9 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
     public void setTxtvRestFlags(TextView txtvRestFlags) {
         this.txtvRestFlags = txtvRestFlags;
     }
-
+    public void setTxtvClock(TextView txtvClock) {
+        this.txtvClock = txtvClock;
+    }
     //endregion
 
     //region 4. Generating methods
@@ -329,6 +339,9 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
 
     //region 6. Methods and Functions for ending the game
     private void endingTheGame(int explodedRow, int explodedColumn){
+        //Stop the Timer
+        stopTimer();
+
         //Setting the background for the buttons
         setBackgroundButtons(explodedRow, explodedColumn);
 
@@ -340,6 +353,9 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
 
     }
     private void winningTheGame(){
+        //Stop the Timer
+        stopTimer();
+
         //Setting the background for the buttons
         setBackgroundButtons(0, 0);
 
@@ -419,4 +435,65 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
         return true;
     }
     //endregion
+
+    //region 8. Setting Timer
+
+    public void setTimer(){
+        //Setting 0 the time
+        time=DEF_ONE_MINUTE;
+
+        //Starting the timer
+        startTimer();
+    }
+
+    private void startTimer(){
+        countDownTimer= new CountDownTimer(time,DEF_ONE_SECOND) {
+            @Override
+            public void onTick(long l) {
+                updateTimer();
+                time += DEF_ONE_SECOND;
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
+    }
+    private void stopTimer(){
+        //Canceling the counting
+        countDownTimer.cancel();
+
+        //Setting the time where end the game
+        time-=DEF_ONE_SECOND;
+
+    }
+
+    private void updateTimer(){
+        //Getting the time in String
+        String strTime=outClock();
+
+        //Setting the TextView
+        txtvClock.setText(strTime);
+    }
+
+    private String outClock(){
+        //Decl and Init
+        int minutes= (int) (time / DEF_ONE_MINUTE)-1;
+        int seconds= (int) time % DEF_ONE_MINUTE / DEF_ONE_SECOND;
+
+        //Setting the String then a clock
+        String strTime;
+        strTime = "" + minutes;
+        strTime += ":";
+        if(seconds < 10){
+            strTime+="0";
+        }
+        strTime += seconds;
+
+        return strTime;
+    }
+
+    //endregion
+
 }

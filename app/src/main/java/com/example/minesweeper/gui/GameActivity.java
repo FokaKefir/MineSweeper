@@ -23,6 +23,7 @@ public class GameActivity extends AppCompatActivity {
     private TableLayout tblAllField;
 
     private TextView txtvRestFlags;
+    private TextView txtvClock;
 
     private GameActivityListener listener;
 
@@ -45,6 +46,7 @@ public class GameActivity extends AppCompatActivity {
         //Gender the Widgets
         this.tblAllField=findViewById(R.id.tblAllField);
         this.txtvRestFlags=findViewById(R.id.txtvRestFlags);
+        this.txtvClock=findViewById(R.id.txtvClock);
 
         //Init widgets
         this.listener=new GameActivityListener(this);
@@ -54,6 +56,9 @@ public class GameActivity extends AppCompatActivity {
 
         //Setting the Variables on the listener
         setVariablesOnListener();
+
+        //Setting the Timer on the listener
+        listener.setTimer();
 
         //Creating the Table
         this.listener.declVariables();
@@ -67,6 +72,7 @@ public class GameActivity extends AppCompatActivity {
     private void setVariablesOnListener(){
         this.listener.setTblAllField(this.tblAllField);
         this.listener.setTxtvRestFlags(this.txtvRestFlags);
+        this.listener.setTxtvClock(this.txtvClock);
         this.listener.setiRow(this.iRowSize);
         this.listener.setImageSize(iImageSize);
         this.listener.setSpaceSize(0);
