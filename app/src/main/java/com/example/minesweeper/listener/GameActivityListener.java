@@ -335,10 +335,13 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
     private void setTextFlags(){
         //Setting the txtvRestFlags
         this.iRestFlags=iFlags-numberingFlags();
-        if(iRestFlags!=0)
-            this.txtvRestFlags.setText("Flags: " + String.valueOf(iRestFlags));
-        else if(watchingToWinning())
-            winningTheGame();
+        this.txtvRestFlags.setText("Flags: " + String.valueOf(iRestFlags));
+
+        //Watching to winning
+        if(iRestFlags==0)
+            if(watchingToWinning())
+                winningTheGame();
+
     }
     //endregion
 
