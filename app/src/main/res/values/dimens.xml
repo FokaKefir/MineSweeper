@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="iMarginText">80dp</dimen>
+    <dimen name="iMarginText">10dp</dimen>
     <dimen name="iMarginLobby">100dp</dimen>
 
 </resources>
