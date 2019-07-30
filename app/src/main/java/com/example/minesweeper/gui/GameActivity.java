@@ -38,7 +38,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //Set the Layout
-        this.setContentView(R.layout.main_activity_layout);
+        this.setContentView(R.layout.game_activity_layout);
 
         //Get value from the activity
         getValuesFromActivity();
@@ -84,7 +84,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu mainActivityMenu) {
         //Inherited Method generates the Menu
-        this.getMenuInflater().inflate(R.menu.main_activity_menu, mainActivityMenu);
+        this.getMenuInflater().inflate(R.menu.game_activity_menu, mainActivityMenu);
 
         //Setting the Step mnuStep and mnuBack invisible
         mainActivityMenu.findItem(R.id.mnuStep).setVisible(false);

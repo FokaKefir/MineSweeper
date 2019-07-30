@@ -226,7 +226,12 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
         //First click
         if(firstClick){
             firstClick=false;
+
+            //Uploading the numberTable
             uploadingNumberTable(row, column);
+
+            //Starting the timer
+            startTimer();
         }
         //Other click
         else {
@@ -331,7 +336,7 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
         //Setting the txtvRestFlags
         this.iRestFlags=iFlags-numberingFlags();
         if(iRestFlags!=0)
-            this.txtvRestFlags.setText("Rest flags: " + String.valueOf(iRestFlags));
+            this.txtvRestFlags.setText("Flags: " + String.valueOf(iRestFlags));
         else if(watchingToWinning())
             winningTheGame();
     }
@@ -442,16 +447,16 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
         //Setting 0 the time
         time=DEF_ONE_MINUTE;
 
-        //Starting the timer
-        startTimer();
+        //Setting the text to 0:00
+        updateTimer();
     }
 
     private void startTimer(){
         countDownTimer= new CountDownTimer(time,DEF_ONE_SECOND) {
             @Override
             public void onTick(long l) {
-                updateTimer();
                 time += DEF_ONE_SECOND;
+                updateTimer();
             }
 
             @Override
@@ -465,7 +470,9 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
         countDownTimer.cancel();
 
         //Setting the time where end the game
-        time-=DEF_ONE_SECOND;
+        String strOutText=outClock();
+
+        Toast.makeText(activity, strOutText, Toast.LENGTH_SHORT).show();
 
     }
 
