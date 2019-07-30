@@ -1,6 +1,7 @@
 package com.example.minesweeper.listener;
 
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
 
     private static final int DEF_ONE_MINUTE=60000;
     private static final int DEF_ONE_SECOND=1000;
+    private static final long DEF_MAX_TIME=600000;
     //endregion
 
     //region 1. Decl
@@ -345,7 +347,7 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
     }
     //endregion
 
-    //region 6. Methods and Functions for ending the game
+    //region 6. Ending the game
     private void endingTheGame(int explodedRow, int explodedColumn){
         //Stop the Timer
         stopTimer();
@@ -374,7 +376,7 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
         mnuBack.setVisible(true);
 
         //Setting the txtvRestFlags to the winner text
-        this.txtvRestFlags.setText("You are save");
+        this.txtvRestFlags.setText("You are in safe");
     }
 
     private void setBackgroundButtons(int explodedRow, int explodedColumn){
@@ -455,7 +457,7 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
     }
 
     private void startTimer(){
-        countDownTimer= new CountDownTimer(time,DEF_ONE_SECOND) {
+        countDownTimer= new CountDownTimer(DEF_MAX_TIME,DEF_ONE_SECOND) {
             @Override
             public void onTick(long l) {
                 time += DEF_ONE_SECOND;
@@ -485,6 +487,14 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
 
         //Setting the TextView
         txtvClock.setText(strTime);
+
+        if(strTime.equals("60:00")){
+            //Ending the game because the time is out
+            endingTheGame(0, 0);
+
+            //Setting the txtvRestFlags to the winner text
+            this.txtvRestFlags.setText("The time is out");
+        }
     }
 
     private String outClock(){
