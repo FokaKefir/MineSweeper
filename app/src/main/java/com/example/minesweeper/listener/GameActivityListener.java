@@ -24,7 +24,7 @@ public class GameActivityListener implements MenuItem.OnMenuItemClickListener {
 
     private static final int DEF_ONE_MINUTE=60000;
     private static final int DEF_ONE_SECOND=1000;
-    private static final long DEF_MAX_TIME=600000;
+    private static final long DEF_MAX_TIME=3600000;
     //endregion
 
     //region 1. Decl
